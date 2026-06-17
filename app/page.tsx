@@ -223,7 +223,7 @@ export default function PortfolioLanding() {
       <div className="relative">
 
         <Image
-          src="/images/EdwinNova.jpg"
+          src="/images/Perfil.jpg"
           alt="Edwin Nova"
           width={450}
           height={450}
