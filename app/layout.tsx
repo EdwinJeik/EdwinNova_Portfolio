@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Edwin Nova | Software Engineer",
+  title: "Edwin Nova | ",
   description: "Portfolio of Edwin Nova. Software Engineering, AI, Data Analytics, Power BI and Digital Products.",
 };
 
