@@ -73,6 +73,14 @@ body {
   box-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 /* Section spacing */
 .section-padding {
   padding-top: 120px;

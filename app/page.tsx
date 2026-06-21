@@ -70,6 +70,7 @@ const translations = {
 export default function PortfolioLanding() {
 
    const [language, setLanguage] = useState("en");
+   const [menuOpen, setMenuOpen] = useState(false);
 
   const t = translations[language as keyof typeof translations];
 
@@ -150,64 +151,135 @@ export default function PortfolioLanding() {
   </div>
 </div>
       {/* NAVBAR */}
-      <header className="fixed top-0 w-full z-50 backdrop-blur-lg bg-transparent/70 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold tracking-wide">
-            Edwin Nova Arévalo
-          </h1>
+            <header className="fixed top-0 w-full z-50 backdrop-blur-lg bg-[#020617]/80 border-b border-slate-800">
+  <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-          <nav className="hidden md:flex gap-8 text-sm text-slate-300">
-            <a href="#about" className="hover:text-sky-400 transition">{t.about}</a>
-            <a href="#skills" className="hover:text-sky-400 transition">{t.skills}</a>
-            <a href="#projects" className="hover:text-sky-400 transition">{t.projects}</a>
-            <a href="#experience" className="hover:text-sky-400 transition">{t.experience}</a>
-            <a href="#contact" className="hover:text-sky-400 transition">{t.contact}</a>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setLanguage("es")}
-                className={`px-3 py-1 rounded-lg transition ${
-                  language === "es"
-                    ? "bg-sky-500 text-slate-950"
-                    : "border border-slate-700 text-slate-400"
-                }`}
-              >
-                ES
-              </button>
+    <h1 className="text-lg md:text-xl font-bold tracking-wide">
+      Edwin Nova Arévalo
+    </h1>
 
-              <button
-                onClick={() => setLanguage("en")}
-                className={`px-3 py-1 rounded-lg transition ${
-                  language === "en"
-                    ? "bg-sky-500 text-slate-950"
-                    : "border border-slate-700 text-slate-400"
-                }`}
-              >
-                EN
-              </button>
-            </div>
-          </nav>
+    {/* Desktop Menu */}
+    <nav className="hidden md:flex items-center gap-8 text-sm text-slate-300">
+      <a href="#about" className="hover:text-sky-400 transition">
+        {t.about}
+      </a>
+
+      <a href="#skills" className="hover:text-sky-400 transition">
+        {t.skills}
+      </a>
+
+      <a href="#projects" className="hover:text-sky-400 transition">
+        {t.projects}
+      </a>
+
+      <a href="#experience" className="hover:text-sky-400 transition">
+        {t.experience}
+      </a>
+
+      <a href="#contact" className="hover:text-sky-400 transition">
+        {t.contact}
+      </a>
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => setLanguage("es")}
+          className={`px-3 py-1 rounded-lg ${
+            language === "es"
+              ? "bg-sky-500 text-slate-950"
+              : "border border-slate-700"
+          }`}
+        >
+          ES
+        </button>
+
+        <button
+          onClick={() => setLanguage("en")}
+          className={`px-3 py-1 rounded-lg ${
+            language === "en"
+              ? "bg-sky-500 text-slate-950"
+              : "border border-slate-700"
+          }`}
+        >
+          EN
+        </button>
+      </div>
+    </nav>
+
+    {/* Mobile Button */}
+    <button
+      className="md:hidden text-3xl text-sky-400"
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      ☰
+    </button>
+  </div>
+
+  {/* Mobile Menu */}
+  {menuOpen && (
+    <div className="md:hidden bg-[#020617]/95 backdrop-blur-xl border-t border-slate-800">
+
+      <div className="flex flex-col p-6 gap-5 text-slate-300">
+
+        <a href="#about" onClick={() => setMenuOpen(false)}>
+          {t.about}
+        </a>
+
+        <a href="#skills" onClick={() => setMenuOpen(false)}>
+          {t.skills}
+        </a>
+
+        <a href="#projects" onClick={() => setMenuOpen(false)}>
+          {t.projects}
+        </a>
+
+        <a href="#experience" onClick={() => setMenuOpen(false)}>
+          {t.experience}
+        </a>
+
+        <a href="#contact" onClick={() => setMenuOpen(false)}>
+          {t.contact}
+        </a>
+
+        <div className="flex gap-2 pt-3">
+          <button
+            onClick={() => setLanguage("es")}
+            className="px-3 py-1 rounded-lg border border-slate-700"
+          >
+            ES
+          </button>
+
+          <button
+            onClick={() => setLanguage("en")}
+            className="px-3 py-1 rounded-lg border border-slate-700"
+          >
+            EN
+          </button>
         </div>
-      </header>
+      </div>
+    </div>
+  )}
+</header>
 
-      {/* HERO */}
-<section className="pt-40 pb-24 px-6">
-  <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-
+                    
+          {/* HERO */}
+          <section className="pt-32 md:pt-40 pb-20 md:pb-24 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
     {/* LEFT SIDE */}
     <div>
       <p className="text-sky-400 mb-4 uppercase tracking-[0.3em] text-sm">
         Digital Engineer
       </p>
 
-      <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-6">
         {t.heroTitle}
       </h1>
 
-      <p className="text-slate-400 text-lg leading-relaxed max-w-xl mb-10">
+      <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-xl mb-10">
         {t.heroDescription}
       </p>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <button className="bg-sky-500 hover:bg-sky-400 transition px-6 py-3 rounded-2xl font-semibold text-slate-950 shadow-lg shadow-sky-500/20">
           View Projects
         </button>
@@ -222,16 +294,16 @@ export default function PortfolioLanding() {
     <div className="flex justify-center">
       <div className="relative">
 
-        <Image
-          src="/images/Perfil.png"
-          alt="Edwin Nova"
-          width={450}
-          height={450}
-          priority
-          className="rounded-3xl border border-slate-700 shadow-2xl"
-        />
+      <Image
+        src="/images/Perfil.png"
+        alt="Edwin Nova"
+        width={450}
+        height={450}
+        priority
+        className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg rounded-3xl border border-slate-700 shadow-2xl"
+      />
 
-        <div className="absolute -bottom-6 -right-6 bg-slate-900/90 backdrop-blur-xl border border-slate-700 rounded-2xl px-5 py-4 shadow-xl">
+        <div className="absolute bottom-4 right-4 md:-bottom-6 md:-right-6">
           <h3 className="font-bold text-sky-400">
             Edwin Nova
           </h3>
@@ -253,7 +325,7 @@ export default function PortfolioLanding() {
 
       {/* ABOUT */}
       <section id="about" className="py-24 px-6 border-t border-slate-900">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <p className="text-sky-400 uppercase tracking-[0.2em] text-sm mb-4">
                {t.about}
@@ -268,7 +340,7 @@ export default function PortfolioLanding() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="bg-transparent/60 backdrop-blur-xl rounded-3xl border border-slate-800 p-8">
               <h3 className="text-4xl font-black text-sky-400">15+</h3>
               <p className="text-slate-400 mt-2">Technologies learned</p>
@@ -295,7 +367,7 @@ export default function PortfolioLanding() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 title: "Frontend",
@@ -349,7 +421,7 @@ export default function PortfolioLanding() {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[
               {
                 title: "Form CRUD Platform",
@@ -381,12 +453,12 @@ export default function PortfolioLanding() {
                 className="bg-transparent/60 backdrop-blur-xl border border-slate-800 rounded-3xl overflow-hidden hover:-translate-y-1 transition duration-300"
               >
                 {project.image && (
-                  <div className="relative h-90">
+                  <div className="relative h-56 md:h-72">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                   </div>
                 )}
@@ -440,7 +512,7 @@ export default function PortfolioLanding() {
             </h2>
           </div>
 
-          <div className="space-y-8 border-l border-slate-800 pl-8">
+          <div className="space-y-8 border-l border-slate-800 pl-6 md:pl-8">
             {[
               {
                 title: "Software Engineering",
@@ -479,7 +551,7 @@ export default function PortfolioLanding() {
             {t.contact}
           </p>
 
-          <h2 className="text-5xl font-black mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-8">
             {t.contactTitle}
           </h2>
 
