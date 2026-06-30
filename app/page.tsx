@@ -3,6 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 
+const stars = [...Array(40)].map(() => ({
+  top: `${Math.random() * 100}%`,
+  left: `${Math.random() * 100}%`,
+  animationDelay: `${Math.random() * 5}s`,
+}));
+
 const translations = {
   es: {
     home: "Inicio",
@@ -67,12 +73,40 @@ const translations = {
   },
   
 };
+
+const projects = [
+  {
+    title: "Form CRUD Platform",
+    images: ["/images/Proyecto1.png"],
+    desc: "Platform with CRUD concept in a form.",
+    technologies: ["React", "Node.js", "MySQL"],
+  },
+  {
+    title: "mHealth Cardiovascular System",
+    images: ["/images/Proyecto2.png"],
+    desc: "Healthcare risk analysis system based on FHIR and SNOMED standards.",
+    technologies: ["JSON", "FHIR", "SNOMED"],
+  },
+  {
+    title: "Power BI Analytics Dashboards",
+    images: ["/images/Power Bi.png"],
+    desc: "Business intelligence dashboards focused on operational optimization.",
+    technologies: ["Power BI", "DAX", "Data Modeling"],
+  },
+  {
+    title: "Design Patterns Systems",
+    images: ["/images/Proyecto4.png"],
+    desc: "Software architecture implementations using Factory, Observer and Decorator.",
+    technologies: ["Java", "C#", "Design Patterns"],
+  },
+];
+
 export default function PortfolioLanding() {
-
-   const [language, setLanguage] = useState("en");
-   const [menuOpen, setMenuOpen] = useState(false);
-
-  const t = translations[language as keyof typeof translations];
+  const [language, setLanguage] = useState<"en" | "es">("en");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const t = translations[language];
 
   return (
     <div className="relative min-h-screen bg-[#020617] text-slate-100 font-sans overflow-hidden">
@@ -137,14 +171,14 @@ export default function PortfolioLanding() {
 
   {/* Floating Stars */}
   <div className="absolute inset-0">
-    {[...Array(40)].map((_, i) => (
+    {stars.map((star, i) => (
       <span
         key={i}
         className="absolute w-[2px] h-[2px] bg-sky-300 rounded-full animate-pulse"
         style={{
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 5}s`,
+          top: star.top,
+          left: star.left,
+          animationDelay: star.animationDelay,
         }}
       />
     ))}
@@ -297,8 +331,8 @@ export default function PortfolioLanding() {
       <Image
         src="/images/Perfil.png"
         alt="Edwin Nova"
-        width={450}
-        height={450}
+        width={350}
+        height={350}
         priority
         className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg rounded-3xl border border-slate-700 shadow-2xl"
       />
@@ -422,43 +456,22 @@ export default function PortfolioLanding() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Form CRUD Platform",
-                image: "/images/Proyecto1.png",
-                desc: "Platform with CRUD concept in a form.",
-                technologies: ["React", "Node.js", "MySQL"],
-              },
-              {
-                title: "mHealth Cardiovascular System",
-                image: "/images/Proyecto2.png",
-                desc: "Healthcare risk analysis system based on FHIR and SNOMED standards.",
-                technologies: ["JSON", "FHIR", "SNOMED"],
-              },
-              {
-                title: "Power BI Analytics Dashboards",
-                image: "/images/Power Bi.png",
-                desc: "Business intelligence dashboards focused on operational optimization.",
-                technologies: ["Power BI", "DAX", "Data Modeling"],
-              },
-              {
-                title: "Design Patterns Systems",
-                image: "/images/Proyecto4.png",
-                desc: "Software architecture implementations using Factory, Observer and Decorator.",
-                technologies: ["Java", "C#", "Design Patterns"],
-              },
-            ].map((project, index) => (
+            {projects.map((project, index) => (
               <div
                 key={index}
                 className="bg-transparent/60 backdrop-blur-xl border border-slate-800 rounded-3xl overflow-hidden hover:-translate-y-1 transition duration-300"
               >
-                {project.image && (
+                {project.images?.[0] && (
                   <div className="relative h-56 md:h-72">
                     <Image
-                      src={project.image}
+                      src={project.images[0]}
                       alt={project.title}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover cursor-pointer hover:scale-105 transition duration-300"
+                      onClick={() => {
+                        setSelectedProject(index);
+                        setSelectedImage(0);
+                      }}
                     />
                   </div>
                 )}
@@ -570,6 +583,83 @@ export default function PortfolioLanding() {
           </div>
         </div>
       </section>
+
+      {
+      selectedProject !== null && (
+
+            <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center transition-all duration-300"
+            onClick={()=>setSelectedProject(null)}
+            >
+
+            <div
+            className="relative w-[90vw] max-w-5xl"
+            onClick={(e)=>e.stopPropagation()}
+            >
+
+            <Image
+            src={projects[selectedProject].images[selectedImage]}
+            alt=""
+            width={1200}
+            height={700}
+            className="rounded-2xl object-contain w-full max-h-[80vh]"
+            />
+
+            <button
+            className="absolute top-4 right-4 text-4xl text-white"
+            onClick={()=>setSelectedProject(null)}
+            >
+
+            ✕
+
+            </button>
+
+            <button
+            className="absolute left-2 top-1/2 -translate-y-1/2 text-5xl text-white"
+            onClick={()=>
+
+            setSelectedImage(
+
+            selectedImage===0
+            ?projects[selectedProject].images.length-1
+            :selectedImage-1
+
+            )
+
+            }
+
+            >
+
+            ❮
+
+            </button>
+
+            <button
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-5xl text-white"
+              onClick={() =>
+                setSelectedImage(
+                  (selectedImage + 1) % projects[selectedProject!].images.length
+                )
+              }
+            >
+              ❯
+            </button>
+
+            <div className="flex justify-center gap-3 mt-5">
+              {projects[selectedProject].images.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-3 h-3 rounded-full ${
+                    selectedImage === i ? "bg-sky-400" : "bg-gray-500"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+      
