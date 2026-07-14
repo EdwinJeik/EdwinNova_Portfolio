@@ -584,7 +584,15 @@ export default function PortfolioLanding() {
           </p>
 
           <div className="flex justify-center flex-wrap gap-4">
-            <button className="bg-sky-500 hover:bg-sky-400 transition px-8 py-4 rounded-2xl text-slate-950 font-bold">
+            <button 
+              onClick={() =>
+                window.open(
+                   "https://www.linkedin.com/in/edwin-nova-69b7b1261",
+                   "_blank"
+                )
+              }
+                className="bg-sky-500 hover:bg-sky-400 transition px-8 py-4 rounded-2xl text-slate-950 font-bold"
+            >
               LinkedIn
             </button>
 
