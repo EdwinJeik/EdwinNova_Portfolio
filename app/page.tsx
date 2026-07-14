@@ -77,13 +77,20 @@ const translations = {
 const projects = [
   {
     title: "Form CRUD Platform",
-    images: ["/images/Proyecto1.png"],
+    images: [
+      "/images/Proyecto1.png",
+      "/images/Proyecto2.png",
+      "/images/Proyecto3.png"
+    ],
     desc: "Platform with CRUD concept in a form.",
     technologies: ["React", "Node.js", "MySQL"],
   },
   {
     title: "mHealth Cardiovascular System",
-    images: ["/images/Proyecto2.png"],
+    images: [
+      "/images/FHIR2.png", 
+      "/images/FHIR1.png"
+    ],
     desc: "Healthcare risk analysis system based on FHIR and SNOMED standards.",
     technologies: ["JSON", "FHIR", "SNOMED"],
   },
@@ -95,7 +102,11 @@ const projects = [
   },
   {
     title: "Design Patterns Systems",
-    images: ["/images/Proyecto4.png"],
+    images: [
+      "/images/Java1.png",
+      "/images/Java2.png",
+      "/images/Java3.png"
+    ],
     desc: "Software architecture implementations using Factory, Observer and Decorator.",
     technologies: ["Java", "C#", "Design Patterns"],
   },
